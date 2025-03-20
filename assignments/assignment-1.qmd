@@ -4,12 +4,127 @@ title: "Assignment 1"
 
 # Assignment 1
 
-```{r}
-1 + 1
-```
-
 My first assignment has two parts.
 
 ## (a)
 
+Kerem Demirtaş, mühendislik ve veri bilimi alanında geniş bir deneyime sahip bir profesyonel. Otoyendüstri bölümü mezunu olduktan sonra, veri bilimi ve yapay zeka gibi ileri düzey konularda kendini geliştirmiş ve kariyerinde önemli adımlar atmış. İlk olarak oyun sektöründe, Spiky Games’te veri bilimi ve fiyatlandırma üzerine çalışmalar yapmış. Burada, kullanıcı davranışlarını ve demografik özelliklerini analiz ederek, doğru zamanda doğru fiyat teklifleri sunmaya yönelik modeller geliştirmiş. Bu tür projeler, Kerem’in veri analitiği ve optimizasyon konularındaki bilgisini pekiştirmiş.
+
+Sonraki yıllarda Intel’de çalışmaya başlamış ve burada da veri bilimi uygulamalarını daha ileriye taşıyarak, endüstriyel veri analitiği üzerinde yoğunlaşmış. Ancak, profesyonel yolculuğunda en ilginç dönüm noktalarından biri, Arizona State Üniversitesi’ne giderek doktoraya başlamasıydı. Hem araştırma görevlisi olarak çalışırken hem de öğretim üyeliği yaparak akademik kariyerine katkı sağlamış. Bu süreç, ona çeşitli disiplinlerden gelen farklı bakış açılarıyla veri bilimi projelerini nasıl şekillendirebileceği konusunda derinlemesine bir anlayış kazandırmış.
+
+Kerem, yalnızca akademik dünyada değil, aynı zamanda endüstriyel sektörde de büyük bir etki yaratmış. 2020 yılı civarında Türkiye’ye döndükten sonra, Spiky Games ve Smartkivi gibi startuplarda çalıştıktan sonra, 2023 Aralık’ta Invent Ai’ye katıldı. Burada, perakende sektöründeki veri analizlerine dayalı yazılım çözümleri üretiyor. Invent Ai, şirketlerin envanter yönetiminden talep tahminlerine kadar birçok alanda veri bilimi ve yapay zekayı kullanarak operasyonel verimliliği artırmayı amaçlayan bir platform sunuyor. Kerem, burada özellikle dinamik fiyatlandırma ve talep tahminleme konularında önemli katkılar sağlıyor.
+
+Konuşmasında, veri biliminin yalnızca büyük veriyle değil, küçük veri setleriyle de etkin bir şekilde kullanılabileceğini belirtiyor. Özellikle, veri temizleme süreçleri ve model değerlendirme konularına dikkat çekiyor. Kendisinin de vurguladığı gibi, veri biliminde doğru problem tanımlaması ve doğru veri analizi yapmak, başarıyı getiren en önemli unsurlar arasında. Kerem, aynı zamanda yapay zeka ve makine öğrenmesinin her zaman belirli bir insan faktörüyle desteklenmesi gerektiğini, çünkü makinelerin her zaman doğru sonuçlar veremeyeceğini belirtiyor.
+
+Otonom araçlar ve trafik akışının optimizasyonu üzerine yaptığı çalışmalar da oldukça dikkat çekici. Bu projelerde, araçların birbirleriyle iletişim kurarak daha verimli bir trafik akışı oluşturması gibi yenilikçi fikirler üzerinde çalışıyor. Otonom araçlar için geliştirdiği modellerde, araçların birbirlerine yakın mesafede güvenli bir şekilde seyahat etmelerini sağlayan algoritmalar kullanıyor. Bu çalışmalar, sadece trafik güvenliğini artırmakla kalmıyor, aynı zamanda trafik yoğunluğunu da azaltmaya yönelik çözümler sunuyor.
+
+Kerem’in kariyerinde veri bilimi, yapay zeka ve optimizasyon alanları arasında güçlü bir bağ var. Bu bağ sayesinde, farklı sektörlerdeki sorunları çözmek için veri bilimi ve yazılım mühendisliğini birleştirerek yaratıcı çözümler geliştirebiliyor. Hem akademik hem de endüstriyel alandaki tecrübeleri, ona veri biliminin gücünü ve potansiyelini tam anlamıyla gösterdi. 
+
+Bu yüzden, otonom araçlar, trafik yönetimi ve veri analitiği gibi karmaşık projelerde önemli bir lider olarak yer alıyor. Gelecekte, hem Türkiye’de hem de dünyada veri bilimi ve yapay zeka uygulamalarını daha da ileriye taşıma konusunda büyük planları var.
+
 ## (b)
+
+```{r}
+library(dslabs)
+
+# 1. Custom Summary Function
+compute_stats <- function(x) {
+  statistics <- list(
+    mean = mean(x, na.rm = TRUE),
+    median = median(x, na.rm = TRUE),
+    variance = var(x, na.rm = TRUE),
+    IQR = IQR(x, na.rm = TRUE),
+    min = min(x, na.rm = TRUE),
+    max = max(x, na.rm = TRUE)
+  )
+  return(statistics)
+}
+
+# 2. Applying the Function Using a 'for' Loop on mtcars dataset
+for (col in colnames(mtcars)) {
+  statistics <- compute_stats(mtcars[[col]])
+  cat("\nStatistics for", col, ":\n")
+  print(statistics)
+}
+
+# 3. Applying the Function Using 'sapply' on mtcars dataset
+statistics_sapply <- sapply(mtcars, compute_stats)
+print(statistics_sapply)
+
+# 4. Applying the Function Using 'apply' on mtcars dataset
+statistics_apply <- apply(mtcars, 2, compute_stats)
+print(statistics_apply)
+
+# 5. Load the 'na_example' dataset from the dslabs package
+data("na_example")
+
+# Check if na_example is a vector, which is the case for this dataset
+if (!is.vector(na_example)) {
+  stop("The dataset 'na_example' is not a vector!")
+}
+
+# Display the contents of the dataset
+print(na_example)
+
+# Identify missing values
+na_positions <- which(is.na(na_example))
+
+# Report the total count of NA values and their positions
+cat("\nTotal number of NAs:", length(na_positions), "\n")
+cat("NA positions:", "\n")
+print(na_positions)
+
+# Compute mean and standard deviation before handling NAs
+mean_before <- mean(na_example, na.rm = TRUE)
+sd_before <- sd(na_example, na.rm = TRUE)
+
+cat("\nMean before handling NAs:", mean_before, "\n")
+cat("Standard deviation before handling NAs:", sd_before, "\n")
+
+# Handling Missing Values
+
+# Version 1: Replace all NA values with the median of the non-missing values
+na_example_version1 <- na_example
+na_example_version1[is.na(na_example_version1)] <- median(na_example_version1, na.rm = TRUE)
+
+# Compute mean and standard deviation for Version 1
+mean_v1 <- mean(na_example_version1, na.rm = TRUE)
+sd_v1 <- sd(na_example_version1, na.rm = TRUE)
+
+cat("\nMean after replacing NAs with median:", mean_v1, "\n")
+cat("Standard deviation after replacing NAs with median:", sd_v1, "\n")
+
+# Version 2: Replace all NA values with randomly selected non-missing values from the dataset
+# Set seed for reproducibility
+set.seed(123)
+
+# Make a copy of the dataset
+na_example_version2 <- na_example
+
+# Loop through the dataset and replace NAs with randomly selected non-missing values
+for (i in 1:length(na_example_version2)) {
+  if (is.na(na_example_version2[i])) {
+    # Get non-missing values
+    non_missing_vals <- na_example_version2[!is.na(na_example_version2)]
+    # Replace NA with a random non-missing value
+    na_example_version2[i] <- sample(non_missing_vals, 1)
+  }
+}
+
+# Compute mean and standard deviation for Version 2 (after replacing NAs)
+mean_v2 <- mean(na_example_version2, na.rm = TRUE)
+sd_v2 <- sd(na_example_version2, na.rm = TRUE)
+
+# Print the results
+cat("\nMean after replacing NAs with random non-missing values:", mean_v2, "\n")
+cat("Standard deviation after replacing NAs with random non-missing values:", sd_v2, "\n")
+
+# Comparison of Mean and Standard Deviation:
+cat("\nComparison of Mean and Standard Deviation:")
+cat("\nOriginal Dataset - Mean:", mean_before, "SD:", sd_before)
+cat("\nVersion 1 - Mean:", mean_v1, "SD:", sd_v1)
+cat("\nVersion 2 - Mean:", mean_v2, "SD:", sd_v2)
+
+```
+
+
