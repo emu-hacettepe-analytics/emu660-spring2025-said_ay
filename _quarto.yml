@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "[Student xxxx]'s Analytics Lab"
+  title: "[Said Ay]'s Analytics Lab"
   navbar:
     search: true
     left:
@@ -22,11 +22,11 @@ website:
             
     tools:
       - icon: github
-        href: https://twitter.com
+        href: https://github.com/saiday98
       - icon: twitter
-        href: https://twitter.com
+        href: https://x.com/Said_Ay
       - icon: linkedin
-        href: https://linkedin.com
+        href: https://www.linkedin.com/in/saiday/
 
   sidebar:
     - title: "Assignments"

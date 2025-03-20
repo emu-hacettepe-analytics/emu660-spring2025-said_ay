@@ -2,11 +2,11 @@
 title: "Assignment 1"
 ---
 
-# Assignment 1
-
 My first assignment has two parts.
 
 ## (a)
+
+***Veri Bilimi ve Endüstri Mühendisliği Üzerine Sohbetler -Kerem Demirtaş & Erdi Daşdemir***
 
 Kerem Demirtaş, mühendislik ve veri bilimi alanında geniş bir deneyime sahip bir profesyonel. Otoyendüstri bölümü mezunu olduktan sonra, veri bilimi ve yapay zeka gibi ileri düzey konularda kendini geliştirmiş ve kariyerinde önemli adımlar atmış. İlk olarak oyun sektöründe, Spiky Games’te veri bilimi ve fiyatlandırma üzerine çalışmalar yapmış. Burada, kullanıcı davranışlarını ve demografik özelliklerini analiz ederek, doğru zamanda doğru fiyat teklifleri sunmaya yönelik modeller geliştirmiş. Bu tür projeler, Kerem’in veri analitiği ve optimizasyon konularındaki bilgisini pekiştirmiş.
 
@@ -18,7 +18,7 @@ Konuşmasında, veri biliminin yalnızca büyük veriyle değil, küçük veri s
 
 Otonom araçlar ve trafik akışının optimizasyonu üzerine yaptığı çalışmalar da oldukça dikkat çekici. Bu projelerde, araçların birbirleriyle iletişim kurarak daha verimli bir trafik akışı oluşturması gibi yenilikçi fikirler üzerinde çalışıyor. Otonom araçlar için geliştirdiği modellerde, araçların birbirlerine yakın mesafede güvenli bir şekilde seyahat etmelerini sağlayan algoritmalar kullanıyor. Bu çalışmalar, sadece trafik güvenliğini artırmakla kalmıyor, aynı zamanda trafik yoğunluğunu da azaltmaya yönelik çözümler sunuyor.
 
-Kerem’in kariyerinde veri bilimi, yapay zeka ve optimizasyon alanları arasında güçlü bir bağ var. Bu bağ sayesinde, farklı sektörlerdeki sorunları çözmek için veri bilimi ve yazılım mühendisliğini birleştirerek yaratıcı çözümler geliştirebiliyor. Hem akademik hem de endüstriyel alandaki tecrübeleri, ona veri biliminin gücünü ve potansiyelini tam anlamıyla gösterdi. 
+Kerem’in kariyerinde veri bilimi, yapay zeka ve optimizasyon alanları arasında güçlü bir bağ var. Bu bağ sayesinde, farklı sektörlerdeki sorunları çözmek için veri bilimi ve yazılım mühendisliğini birleştirerek yaratıcı çözümler geliştirebiliyor. Hem akademik hem de endüstriyel alandaki tecrübeleri, ona veri biliminin gücünü ve potansiyelini tam anlamıyla gösterdi.
 
 Bu yüzden, otonom araçlar, trafik yönetimi ve veri analitiği gibi karmaşık projelerde önemli bir lider olarak yer alıyor. Gelecekte, hem Türkiye’de hem de dünyada veri bilimi ve yapay zeka uygulamalarını daha da ileriye taşıma konusunda büyük planları var.
 
@@ -127,4 +127,6 @@ cat("\nVersion 2 - Mean:", mean_v2, "SD:", sd_v2)
 
 ```
 
+When handling missing data, both methods—replacing missing values with the median and replacing them with a random non-missing value—have their own strengths and weaknesses. Replacing missing values with the median is a more conservative approach. It helps maintain the central tendency of the data without being influenced by outliers, making it a stable choice, especially when the data is skewed. However, this method can reduce variability because it tends to produce less extreme values, which may not fully capture the natural diversity in the data. On the other hand, replacing missing values with a random non-missing value preserves the variability and distribution of the data, which is useful when you want to retain the original data’s spread. This approach is particularly beneficial if the missing data is assumed to be missing at random, as it fills in missing values with data points that reflect the existing distribution. However, if the data is not missing at random, this method could introduce bias.
 
+In general, replacing missing values with the median is a safer and simpler method that ensures stability, especially when you're unsure about the underlying patterns of missingness. This method is often preferred because it minimizes the risk of distorting the data, particularly in cases where the missingness is random. However, if you believe the missing data follows a predictable pattern or is not missing completely at random, replacing it with a random value may be more appropriate to preserve the natural variability of the data. In this case, since the data is relatively small and we want to avoid making overly drastic assumptions, using the median is likely the more practical choice.
