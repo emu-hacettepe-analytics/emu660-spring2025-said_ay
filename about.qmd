@@ -31,3 +31,9 @@ R, Quarto, Git, Python
 # Hobbies
 
 Trail running, scuba diving
+## CV Download
+
+You can download my CV by clicking the button below:
+
+[Download My CV](Said_Ay_CV copy.pdf)
+
