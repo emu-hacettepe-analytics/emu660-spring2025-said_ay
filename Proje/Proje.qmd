@@ -1,0 +1,110 @@
+---
+title: "Proje Teslimi 1"
+author: "Said AY-Eda Hilal AKBULUT"
+date: "27 Nisan 2025"
+format:
+  html:
+    toc: true
+    code-fold: true
+    number-sections: true
+---
+
+# Proje Başlığı
+
+**Türkiye’de Deprem Aktivitesinin Zamansal ve Bölgesel Analizi (1995–2023)**
+
+------------------------------------------------------------------------
+
+## 1. Veri Seti ve Problem Tanımı
+
+Bu proje kapsamında, [USGS Deprem Kataloğu](https://earthquake.usgs.gov/earthquakes/search/) üzerinden elde edilen ve Türkiye (26°-45° Doğu Meridyenleri ve 36°-42° Kuzey Paralelleri arasında kalan alan) için 1995–2023 yılları arasında gerçekleşmiş yer sarsıntılarını içeren açık erişimli bir veri seti kullanılmıştır. Veri seti; her yer sarsıntısının tarihi, saati, büyüklüğü, derinliği, koordinatları ve yer bilgilerini içermektedir.
+
+### Problem Tanımı
+
+Amacımız, **Türkiye’de depremlerin zamansal ve bölgesel dağılımını incelemek** ve şu soruya yanıt aramaktır:
+
+> “Türkiye’de deprem sıklığı ve büyüklüğü yıllar içerisinde nasıl bir değişim göstermiştir ve hangi bölgeler daha yüksek sismik risk taşımaktadır?”
+
+### Hedefler
+
+-   Yıllara göre deprem sıklığı ve büyüklük eğilimlerini incelemek
+-   Türkiye haritası üzerinde bölgesel yoğunlukları görselleştirmek
+-   Yüksek risk taşıyan bölgeleri tespit etmek
+-   Gelişmiş analizler için temel bir zemin oluşturmak
+
+------------------------------------------------------------------------
+
+## 2. Veri Seti Seçim Gerekçesi
+
+-   Türkiye, aktif fay hatları üzerinde yer alan bir ülkedir ve deprem riski oldukça yüksektir.
+-   Seçilen veri seti hem büyük boyutlu hem de toplum güvenliği ve şehir planlaması açısından anlamlıdır.
+-   Jeolojik tehlikeler ve mekânsal-zamansal veri analizi konularına olan ilgimiz nedeniyle bu konu bizim için özel bir öneme sahiptir.
+
+------------------------------------------------------------------------
+
+## 3. Veri Yükleme ve Ön İşleme Planı
+
+### Format
+
+Veri seti sadece 2.0 üstü şiddetteki deprem kategorisindeki yer sarsıntıları ile filtrelenerek `.csv` formatında USGS üzerinden indirilmiş ve R ortamına aktarılmıştır.\
+**Dosya Adı:** `turkey_earthquake_data.csv`
+
+### Planlanan Ön İşleme Adımları
+
+-   `time` sütununu R uyumlu zamansal formata (`POSIXct`) dönüştürmek
+-   Büyüklüğü 3.0’ın altında olan depremleri filtrelemek
+-   Yeni değişkenlerin oluşturulması (örneğin: yıl)
+-   Koordinatların mekânsal veri nesnesine çevrilmesi ()
+
+### Örnek R Kodu
+
+```{r}
+install.packages("sf")
+library(sf)
+eq_data <- read.csv("turkey_earthquake_data.csv")
+eq_data$DateTime <- as.POSIXct(eq_data$time, format="%Y-%m-%dT%H:%M:%OSZ", tz="UTC")
+eq_data <- subset(eq_data, mag >= 3.0)
+eq_data$year <- format(eq_data$DateTime, "%Y")
+
+eq_sf <- st_as_sf(eq_data, coords = c("longitude", "latitude"), crs = 4326)
+save(eq_data, file="eq_data.RData")
+```
+
+### RData Dosya Bağlantısı
+
+Github üzerinden paylaşılacaktır.
+
+------------------------------------------------------------------------
+
+## 4. Veri Setinin Açıklaması
+
+### Genel Bilgiler
+
+-   **Satır Sayısı:** \~20.000 kayıt
+-   **Sütunlar:**
+    -   `time`: Depremin tarih ve saati (ISO formatında)
+    -   `latitude`, `longitude`: Coğrafi koordinatlar
+    -   `depth`: Depremin derinliği (km)
+    -   `mag`: Büyüklük (Richter ölçeği)
+    -   `place`: Depremin gerçekleştiği yer tanımı
+
+### Ön Gözlemler
+
+-   Büyüklük dağılımında sağa çarpık bir yapı beklenmektedir (çoğu deprem küçük büyüklüktedir).
+-   Zaman içinde deprem sayısında artış ya da düzenli döngüler gözlemlenebilir.
+-   Mekânsal yoğunluk analizleriyle aktif fay zonlarında kümelenmeler tespit edilebilir.
+
+
+------------------------------------------------------------------------
+
+## 5. İleriye Yönelik Plan
+
+-   Deprem büyüklükleri ve sıklıklarının zaman içindeki değişimini görselleştirme
+-   Mekânsal analiz yöntemleriyle (örneğin kümeleme) sıcak noktaları tespit etme
+-   Nüfus yoğunluğu veya fay hattı verileriyle entegre risk değerlendirmesi yapma
+
+------------------------------------------------------------------------
+
+## 6. Kod Paylaşımı ve HTML Çıktılar
+
+Tüm R kodları `.html` dosyasına eklenecek olup, kullanıcı isteğine göre **gizlenebilir (collapsible)** biçimde sunulacaktır. Quarto’nun `code-fold: true` özelliği kullanılacaktır.
