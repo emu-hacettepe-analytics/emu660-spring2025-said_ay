@@ -54,19 +54,14 @@ Veri seti sadece 2.0 üstü şiddetteki deprem kategorisindeki yer sarsıntılar
 -   `time` sütununu R uyumlu zamansal formata (`POSIXct`) dönüştürmek
 -   Büyüklüğü 3.0’ın altında olan depremleri filtrelemek
 -   Yeni değişkenlerin oluşturulması (örneğin: yıl)
--   Koordinatların mekânsal veri nesnesine çevrilmesi ()
 
 ### Örnek R Kodu
 
 ```{r}
-install.packages("sf")
-library(sf)
 eq_data <- read.csv("turkey_earthquake_data.csv")
 eq_data$DateTime <- as.POSIXct(eq_data$time, format="%Y-%m-%dT%H:%M:%OSZ", tz="UTC")
 eq_data <- subset(eq_data, mag >= 3.0)
 eq_data$year <- format(eq_data$DateTime, "%Y")
-
-eq_sf <- st_as_sf(eq_data, coords = c("longitude", "latitude"), crs = 4326)
 save(eq_data, file="eq_data.RData")
 ```
 
@@ -93,7 +88,6 @@ Github üzerinden paylaşılacaktır.
 -   Büyüklük dağılımında sağa çarpık bir yapı beklenmektedir (çoğu deprem küçük büyüklüktedir).
 -   Zaman içinde deprem sayısında artış ya da düzenli döngüler gözlemlenebilir.
 -   Mekânsal yoğunluk analizleriyle aktif fay zonlarında kümelenmeler tespit edilebilir.
-
 
 ------------------------------------------------------------------------
 
