@@ -153,5 +153,68 @@
     "title": "About Me",
     "section": "CV Download",
     "text": "CV Download\nYou can download my CV by clicking the button below:\nDownload My CV"
+  },
+  {
+    "objectID": "Proje/Proje.html",
+    "href": "Proje/Proje.html",
+    "title": "Temporal and Regional Analysis of Earthquake Activity in Turkey (1995–2023)",
+    "section": "",
+    "text": "Welcome to our project page.\nHere, you’ll find updates and insights from our ongoing exploration of earthquake patterns in Turkey."
+  },
+  {
+    "objectID": "Proje/Proje.html#data-source",
+    "href": "Proje/Proje.html#data-source",
+    "title": "Temporal and Regional Analysis of Earthquake Activity in Turkey (1995–2023)",
+    "section": "2.1 Data Source",
+    "text": "2.1 Data Source\nThe dataset used in this project was obtained from the USGS Earthquake Catalog, a widely used open-access platform that provides detailed global seismic activity records. For this project, we filtered the data to include only earthquakes that occurred within the borders of Turkey — specifically between 26°–45° Eastern longitudes and 36°–42° Northern latitudes — between the years 1995 and 2023. Additionally, only events with a magnitude of 2.0 or greater were included to focus on perceptible and potentially damaging seismic activity.\nThe dataset was downloaded in .csv format and contains information such as:\n\nDate and Time of the earthquake\n\nMagnitude\n\nDepth (in kilometers)\n\nLatitude and Longitude\n\nPlace (a descriptive region name)\n\nAfter downloading, the data was imported into R for further exploration and preprocessing."
+  },
+  {
+    "objectID": "Proje/Proje.html#general-information-about-data",
+    "href": "Proje/Proje.html#general-information-about-data",
+    "title": "Temporal and Regional Analysis of Earthquake Activity in Turkey (1995–2023)",
+    "section": "2.2 General Information About Data",
+    "text": "2.2 General Information About Data\nThe dataset consists of approximately 30,000 earthquake events recorded in Turkey over a 28-year period. Each row in the dataset corresponds to a unique seismic event, with detailed information such as the time it occurred, its geographical coordinates, how deep it originated, and how strong it was. Most earthquakes are naturally concentrated around Turkey’s well-known fault zones, such as the North Anatolian Fault in the north and the East Anatolian Fault in the southeast. This spatial clustering is something we aim to explore visually in the later sections of the project.\nHere’s a brief overview of the variables:\n\ntime: Timestamp of the earthquake (UTC), including date and hour\n\nlatitude & longitude: Geographic location of the event\n\ndepth: Depth below the surface in kilometers\n\nmag: Magnitude on the Richter scale\n\nplace: Descriptive label provided by USGS, such as nearby city or region\n\nOverall, The structure of the dataset is tidy and consistent, which makes it easier to analyze without extensive restructuring. Thanks to its clean structure, the dataset served as an effective and convenient entry point for our analysis."
+  },
+  {
+    "objectID": "Proje/Proje.html#reason-of-choice",
+    "href": "Proje/Proje.html#reason-of-choice",
+    "title": "Temporal and Regional Analysis of Earthquake Activity in Turkey (1995–2023)",
+    "section": "2.3 Reason of Choice",
+    "text": "2.3 Reason of Choice\nThere are several reasons why we chose this specific dataset:\n\nFirst and foremost, earthquakes have always been a critical topic in Turkey, especially following the devastating seismic events in 1999 and more recently in 2023. Understanding patterns in historical data can offer valuable insights into risk mitigation.\nSecond, the dataset is both rich and clean, and doesn’t require extensive preprocessing to begin analysis. It offers a long temporal range (1995–2023), which makes it ideal for trend detection.\nLastly, We wanted a dataset that is directly relevant to public safety and urban planning in Turkey. The output of this study could contribute to further academic or policy-oriented discussions about seismic preparedness."
+  },
+  {
+    "objectID": "Proje/Proje.html#preprocessing",
+    "href": "Proje/Proje.html#preprocessing",
+    "title": "Temporal and Regional Analysis of Earthquake Activity in Turkey (1995–2023)",
+    "section": "2.4 Preprocessing",
+    "text": "2.4 Preprocessing\nAfter importing the CSV file into R, several preprocessing steps were performed to prepare the dataset for analysis:\n\nDatetime Conversion: The time column was converted into proper POSIXct format to enable time-based analysis.\nFiltering: Earthquakes below magnitude 2.0 were excluded, since they are too weak to be of concern in a risk-focused study.\nRegion Extraction: The place column was parsed to extract province-level identifiers where possible.\nDerived Variables: A year column was created from the datetime to allow annual comparisons.\nMissing Values: The dataset contained minimal missing data, which were either filtered out or imputed where reasonable.\n\nThe cleaned dataset was saved in .RData format for reproducibility and faster processing in future sessions.\n\neq_data &lt;- read.csv(\"turkey_earthquake_data.csv\")\neq_data$DateTime &lt;- as.POSIXct(eq_data$time, format=\"%Y-%m-%dT%H:%M:%OSZ\", tz=\"UTC\")\neq_data &lt;- subset(eq_data, mag &gt;= 3.0)\neq_data$year &lt;- format(eq_data$DateTime, \"%Y\")\nsave(eq_data, file=\"eq_data.RData\")"
+  },
+  {
+    "objectID": "Proje/Proje.html#exploratory-data-analysis",
+    "href": "Proje/Proje.html#exploratory-data-analysis",
+    "title": "Temporal and Regional Analysis of Earthquake Activity in Turkey (1995–2023)",
+    "section": "3.1 Exploratory Data Analysis",
+    "text": "3.1 Exploratory Data Analysis\nIn this section, we will conduct an exploratory analysis of the earthquake data to understand its basic structure and identify potential patterns or issues.\ndeneme deneme deneme denemexxx"
+  },
+  {
+    "objectID": "Proje/Proje.html#trend-analysis",
+    "href": "Proje/Proje.html#trend-analysis",
+    "title": "Temporal and Regional Analysis of Earthquake Activity in Turkey (1995–2023)",
+    "section": "3.2 Trend Analysis",
+    "text": "3.2 Trend Analysis\nxxxxxx"
+  },
+  {
+    "objectID": "Proje/Proje.html#model-fitting",
+    "href": "Proje/Proje.html#model-fitting",
+    "title": "Temporal and Regional Analysis of Earthquake Activity in Turkey (1995–2023)",
+    "section": "3.3 Model Fitting",
+    "text": "3.3 Model Fitting\nxxxxxx"
+  },
+  {
+    "objectID": "Proje/Proje.html#results",
+    "href": "Proje/Proje.html#results",
+    "title": "Temporal and Regional Analysis of Earthquake Activity in Turkey (1995–2023)",
+    "section": "3.4 Results",
+    "text": "3.4 Results\nxxxxxx"
   }
 ]

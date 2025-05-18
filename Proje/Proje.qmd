@@ -1,61 +1,84 @@
 ---
-title: "Proje Teslimi 1"
-author: "Said AY-Eda Hilal AKBULUT"
-date: "27 Nisan 2025"
-format:
-  html:
-    toc: true
-    code-fold: true
-    number-sections: true
+title: "Temporal and Regional Analysis of Earthquake Activity in Turkey (1995–2023)"
 ---
 
-# Proje Başlığı
+Welcome to our project page.
 
-**Türkiye’de Deprem Aktivitesinin Zamansal ve Bölgesel Analizi (1995–2023)**
+Here, you’ll find updates and insights from our ongoing exploration of earthquake patterns in Turkey.
 
-------------------------------------------------------------------------
+# 1. Project Overview and Scope
 
-## 1. Veri Seti ve Problem Tanımı
+Earthquakes remain one of the most pressing natural threats facing Turkey, a country intersected by several active fault lines—most notably the North Anatolian Fault Zone. Understanding the spatio-temporal characteristics of seismic activity is crucial for disaster preparedness, urban planning, and seismic risk mitigation strategies.
 
-Bu proje kapsamında, [USGS Deprem Kataloğu](https://earthquake.usgs.gov/earthquakes/search/) üzerinden elde edilen ve Türkiye (26°-45° Doğu Meridyenleri ve 36°-42° Kuzey Paralelleri arasında kalan alan) için 1995–2023 yılları arasında gerçekleşmiş yer sarsıntılarını içeren açık erişimli bir veri seti kullanılmıştır. Veri seti; her yer sarsıntısının tarihi, saati, büyüklüğü, derinliği, koordinatları ve yer bilgilerini içermektedir.
+This project focuses on analyzing the **temporal trends** and **regional distribution** of earthquakes that occurred in Turkey between **1995 and 2023**, using an openly accessible dataset published by the United States Geological Survey (USGS). The dataset includes thousands of seismic events, each detailed with attributes such as time, location, magnitude, and depth, all confined within Turkey’s geographic boundaries (26°–45° E and 36°–42° N).
 
-### Problem Tanımı
+The primary research question driving this project is:
 
-Amacımız, **Türkiye’de depremlerin zamansal ve bölgesel dağılımını incelemek** ve şu soruya yanıt aramaktır:
+> **"How have earthquake frequency and magnitude changed in Turkey over time, and which regions show consistently higher seismic activity based on historical data?"**
 
-> “Türkiye’de deprem sıklığı ve büyüklüğü yıllar içerisinde nasıl bir değişim göstermiştir ve hangi bölgeler daha yüksek sismik risk taşımaktadır?”
+![](assets/images/deprem.jpg){fig-align="center" width="40%"}
 
-### Hedefler
+To answer this question, the project sets the following objectives:
 
--   Yıllara göre deprem sıklığı ve büyüklük eğilimlerini incelemek
--   Türkiye haritası üzerinde bölgesel yoğunlukları görselleştirmek
--   Yüksek risk taşıyan bölgeleri tespit etmek
--   Gelişmiş analizler için temel bir zemin oluşturmak
+-   **Temporal Analysis**: Track annual or seasonal shifts in earthquake frequency and intensity.
+-   **Spatial Mapping**: Visualize the geographic clustering of earthquakes to identify high-risk zones.
+-   **Magnitude Patterns**: Investigate the distribution of magnitudes and how often stronger quakes occur.
+-   **Risk Identification**: Identify areas of Turkey that exhibit consistently high seismic activity and may require closer monitoring or mitigation efforts.
+-   **Visualization**: Produce clear and informative visualizations, including histograms, time series plots, and density maps, to support interpretations.
 
-------------------------------------------------------------------------
+All analyses are performed in **R**, and the project is compiled and shared through a **Quarto-powered GitHub page**, making it fully transparent and reproducible. The final product is intended to be both informative and accessible to audiences interested in Turkey’s seismic landscape—whether in research, policy, or planning.
 
-## 2. Veri Seti Seçim Gerekçesi
+# 2. Data
 
--   Türkiye, aktif fay hatları üzerinde yer alan bir ülkedir ve deprem riski oldukça yüksektir.
--   Seçilen veri seti hem büyük boyutlu hem de toplum güvenliği ve şehir planlaması açısından anlamlıdır.
--   Jeolojik tehlikeler ve mekânsal-zamansal veri analizi konularına olan ilgimiz nedeniyle bu konu bizim için özel bir öneme sahiptir.
+Understanding the nature of seismic activity in Turkey requires a data-driven approach built on reliable, long-term records. This project builds on a dataset that spans almost three decades, offering a broad view of how seismic behavior has unfolded in different parts of Turkey. It allows not only for time-based comparisons, but also for mapping out regions with higher seismic exposure—making it an ideal foundation for exploratory and risk-focused analysis.
 
-------------------------------------------------------------------------
+## 2.1 Data Source
 
-## 3. Veri Yükleme ve Ön İşleme Planı
+The dataset used in this project was obtained from the [USGS Earthquake Catalog](https://earthquake.usgs.gov/earthquakes/search/), a widely used open-access platform that provides detailed global seismic activity records. For this project, we filtered the data to include only earthquakes that occurred within the borders of Turkey — specifically between 26°–45° Eastern longitudes and 36°–42° Northern latitudes — between the years 1995 and 2023. Additionally, only events with a magnitude of 2.0 or greater were included to focus on perceptible and potentially damaging seismic activity.
 
-### Format
+The dataset was downloaded in `.csv` format and contains information such as:
 
-Veri seti sadece 2.0 üstü şiddetteki deprem kategorisindeki yer sarsıntıları ile filtrelenerek `.csv` formatında USGS üzerinden indirilmiş ve R ortamına aktarılmıştır.\
-**Dosya Adı:** `turkey_earthquake_data.csv`
+-   **Date and Time** of the earthquake\
+-   **Magnitude**\
+-   **Depth (in kilometers)**\
+-   **Latitude and Longitude**\
+-   **Place** (a descriptive region name)
 
-### Planlanan Ön İşleme Adımları
+After downloading, the data was imported into R for further exploration and preprocessing.
 
--   `time` sütununu R uyumlu zamansal formata (`POSIXct`) dönüştürmek
--   Büyüklüğü 3.0’ın altında olan depremleri filtrelemek
--   Yeni değişkenlerin oluşturulması (örneğin: yıl)
+## 2.2 General Information About Data
 
-### Örnek R Kodu
+The dataset consists of approximately **30,000 earthquake events** recorded in Turkey over a **28-year period**. Each row in the dataset corresponds to a unique seismic event, with detailed information such as the time it occurred, its geographical coordinates, how deep it originated, and how strong it was. Most earthquakes are naturally concentrated around Turkey’s well-known fault zones, such as the North Anatolian Fault in the north and the East Anatolian Fault in the southeast. This spatial clustering is something we aim to explore visually in the later sections of the project.
+
+Here's a brief overview of the variables:
+
+-   `time`: Timestamp of the earthquake (UTC), including date and hour\
+-   `latitude` & `longitude`: Geographic location of the event\
+-   `depth`: Depth below the surface in kilometers\
+-   `mag`: Magnitude on the Richter scale\
+-   `place`: Descriptive label provided by USGS, such as nearby city or region
+
+Overall, The structure of the dataset is tidy and consistent, which makes it easier to analyze without extensive restructuring. Thanks to its clean structure, the dataset served as an effective and convenient entry point for our analysis.
+
+## 2.3 Reason of Choice
+
+There are several reasons why we chose this specific dataset:
+
+-   First and foremost, earthquakes have always been a critical topic in Turkey, especially following the devastating seismic events in 1999 and more recently in 2023. Understanding patterns in historical data can offer valuable insights into risk mitigation.
+-   Second, the dataset is both **rich** and **clean**, and doesn't require extensive preprocessing to begin analysis. It offers a long temporal range (1995–2023), which makes it ideal for trend detection.
+-   Lastly, We wanted a dataset that is directly relevant to public safety and urban planning in Turkey. The output of this study could contribute to further academic or policy-oriented discussions about seismic preparedness.
+
+## 2.4 Preprocessing
+
+After importing the CSV file into R, several preprocessing steps were performed to prepare the dataset for analysis:
+
+-   **Datetime Conversion**: The `time` column was converted into proper POSIXct format to enable time-based analysis.
+-   **Filtering**: Earthquakes below magnitude 2.0 were excluded, since they are too weak to be of concern in a risk-focused study.
+-   **Region Extraction**: The `place` column was parsed to extract province-level identifiers where possible.
+-   **Derived Variables**: A `year` column was created from the datetime to allow annual comparisons.
+-   **Missing Values**: The dataset contained minimal missing data, which were either filtered out or imputed where reasonable.
+
+The cleaned dataset was saved in `.RData` format for reproducibility and faster processing in future sessions.
 
 ```{r}
 eq_data <- read.csv("turkey_earthquake_data.csv")
@@ -65,40 +88,28 @@ eq_data$year <- format(eq_data$DateTime, "%Y")
 save(eq_data, file="eq_data.RData")
 ```
 
-### RData Dosya Bağlantısı
+# 3. Analysis
 
-Github üzerinden paylaşılacaktır.
+xxxxxx
 
-------------------------------------------------------------------------
+## 3.1 Exploratory Data Analysis
 
-## 4. Veri Setinin Açıklaması
+In this section, we will conduct an exploratory analysis of the earthquake data to understand its basic structure and identify potential patterns or issues.
 
-### Genel Bilgiler
+deneme deneme deneme denemexxx
 
--   **Satır Sayısı:** \~20.000 kayıt
--   **Sütunlar:**
-    -   `time`: Depremin tarih ve saati (ISO formatında)
-    -   `latitude`, `longitude`: Coğrafi koordinatlar
-    -   `depth`: Depremin derinliği (km)
-    -   `mag`: Büyüklük (Richter ölçeği)
-    -   `place`: Depremin gerçekleştiği yer tanımı
+## 3.2 Trend Analysis
 
-### Ön Gözlemler
+xxxxxx
 
--   Büyüklük dağılımında sağa çarpık bir yapı beklenmektedir (çoğu deprem küçük büyüklüktedir).
--   Zaman içinde deprem sayısında artış ya da düzenli döngüler gözlemlenebilir.
--   Mekânsal yoğunluk analizleriyle aktif fay zonlarında kümelenmeler tespit edilebilir.
+## 3.3 Model Fitting
 
-------------------------------------------------------------------------
+xxxxxx
 
-## 5. İleriye Yönelik Plan
+## 3.4 Results
 
--   Deprem büyüklükleri ve sıklıklarının zaman içindeki değişimini görselleştirme
--   Mekânsal analiz yöntemleriyle (örneğin kümeleme) sıcak noktaları tespit etme
--   Nüfus yoğunluğu veya fay hattı verileriyle entegre risk değerlendirmesi yapma
+xxxxxx
 
-------------------------------------------------------------------------
+# 4. Results and Key Takeaways
 
-## 6. Kod Paylaşımı ve HTML Çıktılar
-
-Tüm R kodları `.html` dosyasına eklenecek olup, kullanıcı isteğine göre **gizlenebilir (collapsible)** biçimde sunulacaktır. Quarto’nun `code-fold: true` özelliği kullanılacaktır.
+xxxxxx
